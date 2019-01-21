@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.system.perfect.moviecatalogsubm2.adapter.MoviesAdapter;
 import com.system.perfect.moviecatalogsubm2.model.Movie;
+import com.system.perfect.moviecatalogsubm2.support.ItemClickSupport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,11 +47,22 @@ public class MainActivity extends AppCompatActivity {
         showDataList();
     }
 
+    private void showSelectedMovie(Movie data){
+        Toast.makeText(this, "Kamu memilih "+data.getTitle(), Toast.LENGTH_SHORT).show();
+    }
+
     public void showDataList(){
         rvMovie.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new MoviesAdapter(this);
         adapter.setMovieList(movieItemses);
         rvMovie.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rvMovie).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                showSelectedMovie(movieItemses.get(position));
+            }
+        });
     }
 
     private void requestMovieData() {
