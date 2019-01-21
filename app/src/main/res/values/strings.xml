@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MovieCatalogSubm2</string>
+    <string name="title_activity_detail_movie">DetailMovieActivity</string>
+    <string name="detail_title">"Judul Film"</string>
+    <string name="action_settings">Settings</string>
 </resources>
