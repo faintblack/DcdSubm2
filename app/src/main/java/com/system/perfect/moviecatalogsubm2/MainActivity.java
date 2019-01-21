@@ -49,10 +49,6 @@ public class MainActivity extends AppCompatActivity {
         showDataList();
     }
 
-    private void showSelectedMovie(Movie data){
-        Toast.makeText(this, "Kamu memilih "+data.getTitle(), Toast.LENGTH_SHORT).show();
-    }
-
     public void showDataList(){
         rvMovie.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new MoviesAdapter(this);
@@ -62,11 +58,17 @@ public class MainActivity extends AppCompatActivity {
         ItemClickSupport.addTo(rvMovie).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Movie item = movieItemses.get(position);
                 showSelectedMovie(movieItemses.get(position));
                 Intent detailMovieIntent = new Intent(MainActivity.this, DetailMovieActivity.class);
+                detailMovieIntent.putExtra(DetailMovieActivity.EXTRA_MOVIE, item);
                 startActivity(detailMovieIntent);
             }
         });
+    }
+
+    private void showSelectedMovie(Movie data){
+        Toast.makeText(this, "Kamu memilih "+data.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     private void requestMovieData() {

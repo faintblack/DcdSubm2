@@ -1,11 +1,14 @@
 package com.system.perfect.moviecatalogsubm2.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Parcelable {
     private String genre, vote_average, title, poster_path, original_language, original_title,
             backdrop_path, overview, release_date;
     private int id, popularity;
@@ -35,6 +38,7 @@ public class Movie {
             this.backdrop_path = backdrop;
             this.original_language = original_language;
             this.original_title = original_title;
+            this.vote_average = rating;
             this.release_date = release_date;
             this.overview = synopsys;
 
@@ -130,4 +134,51 @@ public class Movie {
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.genre);
+        dest.writeString(this.vote_average);
+        dest.writeString(this.title);
+        dest.writeString(this.poster_path);
+        dest.writeString(this.original_language);
+        dest.writeString(this.original_title);
+        dest.writeString(this.backdrop_path);
+        dest.writeString(this.overview);
+        dest.writeString(this.release_date);
+        dest.writeInt(this.id);
+        dest.writeInt(this.popularity);
+    }
+
+    protected Movie(Parcel in) {
+        this.genre = in.readString();
+        this.vote_average = in.readString();
+        this.title = in.readString();
+        this.poster_path = in.readString();
+        this.original_language = in.readString();
+        this.original_title = in.readString();
+        this.backdrop_path = in.readString();
+        this.overview = in.readString();
+        this.release_date = in.readString();
+        this.id = in.readInt();
+        this.popularity = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

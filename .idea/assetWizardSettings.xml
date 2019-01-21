@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="5630ee" />
-                            <entry key="outputName" value="ic_favorite_black_24dp" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_favorite_white" />
                             <entry key="sourceFile" value="C:\Users\Mahardk" />
                           </map>
                         </option>
